@@ -1,0 +1,9 @@
+ucl:
+  name: UEFA Champions League
+  country: Spain
+laliga:
+  name: Liga BBVA
+  country: Spain
+premier:
+  name: Premier League
+  country: England

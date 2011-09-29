@@ -1,0 +1,26 @@
+= simple_form_for @team, :html => {:multipart => true}  do |f|
+  - if @team.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@team.errors.count, "error") 
+        prohibited this cup from being saved:
+      %ul
+        - @team.errors.full_messages.each do |msg|
+          %li
+            = msg
+  
+  = f.input :image, :as => :file, :error => false
+  %br
+  %br
+  = f.input :name, :error => false
+  %br
+  %br
+  = f.input :year_of_creation, :as => :select, :collection => YEARS, :error => false
+  %br
+  %br
+  = f.input :country, :as => :select, :collection => COUNTRIES, :error => false
+  %br
+  %br
+  .submit-button
+    = f.button :submit
+

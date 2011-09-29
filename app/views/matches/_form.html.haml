@@ -1,0 +1,34 @@
+= simple_form_for @match do |f|
+  - if @match.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@match.errors.count, "error")
+        prohibited this stadium from being saved:
+      %ul
+        - @match.errors.full_messages.each do |msg|
+          %li
+            = msg      
+  = f.input :date, :as => :date, :error => false
+  %br
+  %br
+  = f.association :stadium, :error => false
+  %br
+  %br
+  = f.association :cup, :error => false
+  %br
+  %br
+  = f.association :home_team, :error => false
+  %br
+  %br
+  = f.association :away_team, :error => false
+  %br
+  %br
+  = f.input :home_team_result, :error => false
+  %br
+  %br
+  = f.input :away_team_result, :error => false
+  %br
+  %br
+  .submit-button
+    = f.button :submit
+

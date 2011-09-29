@@ -1,0 +1,28 @@
+= simple_form_for @stadium, :html => {:multipart => true} do |f|
+  - if @stadium.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@stadium.errors.count, "error")
+        prohibited this stadium from being saved:
+      %ul
+        - @stadium.errors.full_messages.each do |msg|
+          %li
+            = msg      
+  = f.input :image, :error => false
+  %br
+  %br
+  = f.input :name, :error => false
+  %br
+  %br
+  = f.input :year_of_inauguration, :as => :select, :collection => YEARS, :error => false
+  %br
+  %br
+  = f.input :country, :as => :select, :collection => COUNTRIES, :error => false
+  %br
+  %br
+  = f.input :capacity, :error => false
+  %br
+  %br
+  .submit-button
+    = f.button :submit
+

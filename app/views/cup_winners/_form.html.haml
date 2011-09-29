@@ -1,0 +1,16 @@
+= simple_form_for(@cup_winner) do |f|
+  - if @cup_winner.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@cup_winner.errors.count, "error") 
+        prohibited this cup from being saved:
+      %ul
+        - @cup_winner.errors.full_messages.each do |msg|
+          %li
+            = msg
+  = f.input :year, :as => :select, :collection => YEARS, :error => false
+  = f.association :cup, :error => false
+  = f.association :team, :error => false
+  
+  .submit-button
+    = f.button :submit 

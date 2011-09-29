@@ -1,0 +1,19 @@
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :email, :required => true, :autofocus => true %>
+  <br/>
+  <br/>
+  <%= f.input :password, :required => true %>
+  <br/>
+  <br/>
+  <%= f.input :password_confirmation, :required => true %>
+  <br/>
+  <br/>
+  <div class="submit-button">
+    <%= f.button :submit, "Sign up" %>
+  </div>
+<% end %>
+
+<%= render :partial => "devise/shared/links" %>

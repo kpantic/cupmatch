@@ -1,0 +1,41 @@
+%p
+  .image
+    = image_tag @stadium.image.url(:medium)
+  %b
+    Name:
+  = @stadium.name
+  %br
+  %b
+    Year of inauguration:
+  = @stadium.year_of_inauguration
+  %br
+  %b
+    Country:
+  = @stadium.country
+  %br
+  %b
+    Capacity:
+  = @stadium.capacity
+
+= link_to 'Edit', edit_stadium_path(@stadium)
+|
+= link_to 'Back', stadia_path
+
+%ul.tabs
+  %li.active
+    %a{:href => "#matches"}
+      Matches
+  %li
+    %a{:href => "#cups"}
+      Cups
+
+.tab-content
+  #matches
+    = render :template => 'matches/index'
+  #cups
+    = render :template => 'cups/index'
+
+:javascript
+  $(function(){
+  $('a[href="#matches"]').click();
+  });

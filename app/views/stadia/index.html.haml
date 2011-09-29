@@ -1,0 +1,49 @@
+- if controller_name == 'stadia'
+  = form_tag({:action => :index}, :method => :get, :authenticity_token => false, :class => 'filter') do
+    = label_tag "name", "Name: "
+    = text_field_tag "name", @name, :placeholder => "Name"
+    %br
+    %br
+    = label_tag "country", "Country: "
+    = select_tag "country", options_for_select(COUNTRIES, @country), :include_blank => true
+    %br
+    %br
+    = submit_tag "Filter"
+
+%table
+  %tr
+    %th
+      Image
+    %th
+      Name
+    %th
+      Year of inauguration
+    %th
+      Country
+    %th
+      Capacity
+    %th
+    %th
+
+  - @stadia.each do |stadium|
+    %tr
+      %td
+        %a{:href => url_for(:action => 'show', :id => stadium)}
+          = image_tag stadium.image.url(:thumb)
+      %td
+        %a{:href => url_for(:action => 'show', :id => stadium)}
+          = stadium.name
+      %td
+        = stadium.year_of_inauguration
+      %td
+        = stadium.country
+      %td
+        = stadium.capacity
+      %td
+        = link_to 'Edit', edit_stadium_path(stadium)
+      %td
+        = link_to 'Destroy', stadium, :confirm => 'Are you sure?', :method => :delete
+
+%br
+- if controller_name == 'stadia'
+  = link_to 'New Stadium', new_stadium_path

@@ -1,0 +1,44 @@
+- if controller_name == 'teams'
+  = form_tag({:action => :index}, :method => :get, :authenticity_token => false, :class => 'filter') do
+    = label_tag "name", "Name: "
+    = text_field_tag "name", @name, :placeholder => "Name"
+    %br
+    %br
+    = label_tag "country", "Country: "
+    = select_tag "country", options_for_select(COUNTRIES, @country), :include_blank => true
+    %br
+    %br
+    = submit_tag "Filter"
+
+%table
+  %tr
+    %th
+      Image
+    %th
+      Name
+    %th
+      Year of Creation
+    %th
+      Country
+    %th
+    %th
+  - @teams.each do |team|
+    %tr
+      %td
+        %a{:href => url_for(:action => 'show', :id => team)}
+          = image_tag team.image.url(:thumb)
+      %td
+        %a{:href => url_for(:action => 'show', :id => team)}
+          = team.name
+      %td
+        = team.year_of_creation
+      %td
+        = team.country
+      %td
+        = link_to 'Edit', edit_team_path(team)
+      %td
+        = link_to 'Destroy', team, :confirm => 'Are you sure?', :method => :delete
+      %br
+
+- if controller_name == 'teams'
+  = link_to 'New Team', new_team_path

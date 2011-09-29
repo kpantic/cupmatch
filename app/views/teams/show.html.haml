@@ -1,0 +1,37 @@
+%p
+  .image
+    = image_tag @team.image.url(:medium)
+  %b
+    Name:
+  = @team.name
+  %br
+  %b
+    Year of creation:
+  = @team.year_of_creation
+  %br
+  %b
+    Country:
+  = @team.country
+
+= link_to 'Edit', edit_team_path(@team)
+|
+= link_to 'Back', teams_path
+
+%ul.tabs
+  %li.active
+    %a{:href => "#cups"}
+      Cups
+  %li
+    %a{:href => "#matches"}
+      Matches
+
+.tab-content
+  #cups
+    = render :template => 'cups/index'
+  #matches
+    = render :template => 'matches/index'
+
+:javascript
+  $(function(){
+  $('a[href="#cups"]').click();
+  });

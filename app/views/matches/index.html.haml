@@ -1,0 +1,86 @@
+- if controller_name == 'matches'
+  = form_tag({:action => :index}, :method => :get, :authenticity_token => false, :class => 'filter') do
+    = label_tag "cup", "Cup: "
+    = select_tag "cup", options_from_collection_for_select(Cup.all,"id","name", @cup), :include_blank => true
+    %br
+    %br
+    = label_tag "stadium", "Stadium: "
+    = select_tag "stadium", options_from_collection_for_select(Stadium.all, "id", "name", @stadium), :include_blank => true
+    %br
+    %br
+    = label_tag "home_team", "Home Team: "
+    = select_tag "home_team", options_from_collection_for_select(Team.all, "id", "name", @home_team), :include_blank => true
+    %br
+    %br
+    = label_tag "away_team", "Away Team: "
+    = select_tag "away_team", options_from_collection_for_select(Team.all, "id","name", @away_team), :include_blank => true
+    %br
+    %br
+    = label_tag "from_date", "From: "
+    = select_date (unless @from_date.nil? then @from_date else nil end),:include_blank => true, :prefix => "from_date", :start_year => 1850, :end_year => Time.now.year, :order => [:month,:day,:year]
+    %br
+    %br
+    = label_tag "to_date", "To: "
+    = select_date (unless @to_date.nil?  then @to_date else nil end),:include_blank => true, :prefix => "to_date", :start_year => 1850, :end_year => Time.now.year, :order => [:month,:day,:year], :end_year => Time.now.year
+    %br
+    %br
+    = submit_tag "Filter"
+
+%table
+  %tr
+    %th
+      Date
+    %th
+      Cup
+    %th
+      Stadium
+    %th
+      Home Team
+    %th
+      Away Team
+    %th
+      Result
+    %th
+    %th
+
+  - @matches.each do |match|
+    %tr
+      %td
+        = match.date.strftime("%m/%d/%Y")
+      %td
+        - if match.cup.nil?
+          Unknown
+        - else
+          %a{:href => url_for(:controller => 'cups', :action => 'show', :id => match.cup)}
+            = match.cup.name
+      %td
+        - if match.stadium.nil?
+          Unknown
+        - else
+          %a{:href => url_for(:controller => 'stadia', :action => 'show', :id => match.stadium)}
+            = match.stadium.name
+      %td
+        - if match.home_team.nil?
+          Unknown
+        - else
+          %a{:href => url_for(:controller => 'teams', :action => 'show', :id => match.home_team)}
+            = match.home_team.name
+      %td
+        - if match.away_team.nil?
+          Unknown
+        - else
+          %a{:href => url_for(:controller => 'teams', :action => 'show', :id => match.away_team)}
+            = match.away_team.name
+      %td
+        = match.home_team_result
+        ="-"
+        = match.away_team_result
+      %td
+        = link_to 'Edit', edit_match_path(match)
+      %td
+        = link_to 'Destroy', match, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+- if controller_name == 'matches'
+  = link_to 'New Match', new_match_path

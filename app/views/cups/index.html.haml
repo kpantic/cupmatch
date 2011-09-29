@@ -1,0 +1,54 @@
+- if controller_name == 'cups' 
+  = form_tag({:action => :index}, :method => :get, :authenticity_token => false, :class => 'filter') do
+    = label_tag "name", "Name: "
+    = text_field_tag "name", @name, :placeholder => "Name"
+    %br
+    %br
+    = label_tag "country", "Country: "
+    = select_tag "country", options_for_select(COUNTRIES, @country), :include_blank => true
+    %br
+    %br
+    = label_tag "year_started", "Year Started: "
+    = select_tag "year_started", options_for_select(1850..Time.now.year, @country), :include_blank => true
+    %br
+    %br
+    = submit_tag "Filter"
+
+%table.list
+  %tr
+    %th 
+      Image
+    %th
+      Name
+    %th
+      Country
+    %th
+      Year started
+    %th
+      Frequency
+    %th
+    %th
+
+  - @cups.each do |cup|
+    %tr
+      %td
+        %a{:href => url_for(:action => 'show', :id => cup)}
+          = image_tag cup.image.url(:thumb)    
+      %td
+        %a{:href => url_for(:action => 'show', :id => cup)}
+          = cup.name
+      %td
+        = cup.country
+      %td
+        = cup.year_started
+      %td
+        = cup.frequency
+      %td
+        = link_to 'Edit', edit_cup_path(cup)
+      %td
+        = link_to 'Destroy', cup, :confirm => 'Are you sure?', :method => :delete
+
+      %br
+
+- if controller_name == 'cups'
+  = link_to 'New Cup', new_cup_path

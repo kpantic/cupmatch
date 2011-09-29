@@ -1,0 +1,26 @@
+%table
+  %tr
+    %th
+      Cup
+    %th
+      Year
+    %th
+      Team
+    %th
+    %th
+
+  - @cup_winners.each do |cup_winner|
+    %tr
+      %td
+        = cup_winner.cup.name
+      %td
+        = cup_winner.year
+      %td
+        = cup_winner.team.name
+      %td
+        = link_to 'Edit', edit_cup_winner_path(cup_winner)
+      %td
+        = link_to 'Destroy', cup_winner, :confirm => 'Are you sure?', :method => :delete
+%br
+
+= link_to 'New Cup winner', new_cup_winner_path

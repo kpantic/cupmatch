@@ -1,0 +1,14 @@
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <div>
+    <%= f.input :email, :class => '',:required => false, :label => "Email: ", :input_html => {:size => 20} %>
+    <%= f.input :password, :class => '', :required => false, :label => "Password: ", :input_html => {:size => 20} %>
+    <%= f.input :remember_me,:label => "Remember me", :as => :boolean if devise_mapping.rememberable? %>
+  </div>
+  <br/>
+  <div>
+    <%= f.button :submit, "Sign in" %>
+  </div>
+<% end %>
+<div class="links">
+  <%= render :partial => "devise/shared/links" %>
+</div>

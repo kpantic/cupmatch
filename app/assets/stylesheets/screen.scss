@@ -1,0 +1,275 @@
+// This import applies a global reset to any page that imports this stylesheet.
+@import "blueprint/reset";
+
+// To configure blueprint, edit the partials/base.sass file.
+@import "partials/base";
+
+// Import all the default blueprint modules so that we can access their mixins.
+@import "blueprint";
+
+// Import the non-default scaffolding module.
+@import "blueprint/scaffolding";
+
+// To generate css equivalent to the blueprint css but with your
+// configuration applied, uncomment:
+// @include blueprint
+
+// If you are doing a lot of stylesheet concatenation, it is suggested
+// that you scope your blueprint styles, so that you can better control
+// what pages use blueprint when stylesheets are concatenated together.
+body.bp {
+  @include blueprint-typography(true);
+  @include blueprint-utilities;
+  @include blueprint-debug;
+  @include blueprint-interaction;
+  // Remove the scaffolding when you're ready to start doing visual design.
+  // Or leave it in if you're happy with how blueprint looks out-of-the-box
+  font-weight:normal;
+  a,a:link,a:hover,a:visited{
+	font-weight:normal;
+  }
+}
+
+form.bp {
+  @include blueprint-form;
+  // You'll probably want to remove the scaffolding once you start styling your site.
+  @include blueprint-scaffolding; }
+
+// Page layout can be done using mixins applied to your semantic classes and IDs:
+body.two-col {
+  #container {
+    @include container; }
+  #header, #footer {
+    @include column($blueprint-grid-columns); }
+  #sidebar {
+    // One third of the grid columns, rounding down. With 24 cols, this is 8.
+    $sidebar-columns: floor($blueprint-grid-columns / 3);
+    @include column($sidebar-columns); }
+  #content {
+    // Two thirds of the grid columns, rounding up.
+    // With 24 cols, this is 16.
+    $content-columns: ceil(2 * $blueprint-grid-columns / 3);
+    // true means it's the last column in the row
+    @include column($content-columns, true); } }
+
+
+#container {
+	   @include container;
+
+	   a.brand{
+		float: left;
+		display: block;
+		padding: 8px 20px 12px;
+		margin-left: -20px;
+		color: white;
+		font-size: 20px;
+		font-weight: 200;
+		line-height: 1;
+		text-decoration:none;
+	   }
+	   a.brand:hover{
+	   	text-decoration:underline;
+	   }
+
+	   form .input{
+	   	margin-left:0px;
+	   }
+
+	   ul.nav{
+	      margin:0;
+	      a{
+		color: #BFBFBF;
+		text-decoration:none;
+	      }
+	      a:hover{
+		color: white;
+		text-decoration: none;
+	      }
+	      .active a{
+		background-color: #333;
+		background-color: rgba(255, 255, 255, 0.05);
+		color: white;
+		text-decoration: none;
+	      }
+	   }
+	   .dropdown-menu{
+		label{
+			margin-top:8px;
+	   		text-align:left;
+			color:white;
+		}
+		input[type="checkbox"]{
+			float:left;
+			margin: 9px 0;
+		}
+		a{
+			display:inline;
+			padding:0;
+			text-shadow:none;
+			margin-top:10px;
+			padding-left:10px;
+		}
+		a:hover {
+			background:transparent;
+		}
+		.links{
+			a{
+				text-decoration:underline;
+			}
+			margin-top: 142px;
+			display: block;
+			margin-bottom: 10px;
+		}
+		padding-left:10px;
+		padding-right:10px;
+                div {
+		    width:auto;
+		}
+	   }
+
+	   .header{@include column(24); text-align: left; height:170px; padding-top:30px; @include last;}
+	   .two-column{
+		@include column(18);
+		table.list th,td{
+			text-align:center;
+                        vertical-align:middle;
+		}
+		.tabs{
+			margin-top:40px;
+		}
+		.image{
+                        margin-right:30px;
+			float:left;
+		}
+
+		input[type='checkbox']{
+		   margin-top:4px;
+		   margin-left: 80px;
+		   margin-right: -50px;
+		}
+		input.string, input.numeric, input.password, input[type='text']{
+    		   padding:0;
+    		   height:auto;
+		}
+
+		input, select {
+    		   float:left;
+    		   margin-left: 10px;
+    		   margin-top: -4px;
+    		   width:auto;
+		}
+		.links{
+		   float:left;
+		}
+
+		select {
+           	   height:auto;
+	   	   line-height:auto;           
+		}
+		.submit-button{
+			width:100%;
+			text-align:center;
+    			input[type='submit']{
+				float:none;
+				margin-top:15px;
+			}	
+		}
+
+	   }
+	   #other-body{
+		padding-top:20px;
+	   }
+	   .right-column{@include column(5); margin-left:30px; height: 500px;@include last;}
+	   .login{float:right;}
+           .right-column{
+	       #activity-overlay{
+	          position: absolute;
+	          z-index: 1000;
+	          background-color: #EEE;
+	          background-image: url('/images/spinner.gif');
+	          background-repeat: no-repeat;
+	          background-position: center;
+	          height: 463px;
+	          width: inherit;
+	          border-bottom-left-radius: 8px;
+	          border-bottom-right-radius: 8px;
+	          opacity:0.75;
+	          -moz-opacity:0.75;
+	          filter:alpha(opacity=75);
+	          display:none;
+	       }
+	       #activity-overlay.loading{
+	          display:block;
+               }
+	       .activity-header{
+	           text-align:center;
+	           color:white;
+	           border-top-left-radius: 8px;
+	           border-top-right-radius: 8px;
+	           padding-top:10px;
+	           padding-bottom:10px;
+	           margin-bottom:-1px;
+	           background-color:black;
+	       }
+	       border-radius:9px;
+	       border: 1px solid black; 
+	       #activity-content{
+	          overflow:auto;
+	          height:92%;
+	          li{
+	             list-style: none;
+	             padding: 10px;
+	             border-top: 1px solid black;
+	          }
+	       }
+	   }
+    
+    .filter{
+	input[type='submit']{
+           position: relative;
+           left: 130px;
+           top: 10px;
+           margin-bottom: 30px;
+       }
+   }
+
+}
+.footer{
+        @include last;
+	width:100%;
+        margin-top:40px;
+	background-color:#222;
+	height:85px;
+        color:white;
+	text-align:center;
+        padding-top:10px
+}
+
+.simple_form div{
+    width:70%;
+    margin-bottom:3px;
+    float:left;
+}
+
+
+input[type='submit']{
+    background-color: #444;
+    padding: 4px 9px;
+    color: white;
+    color: rgba(255, 255, 255, 0.75);
+    border: 1px solid #111;
+    -webkit-border-radius: 4px;
+           -moz-border-radius: 4px;
+	   border-radius: 4px;
+           -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1),0 1px 0px rgba(255, 255, 255, 0.25);
+	   -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1),0 1px 0px rgba(255, 255, 255, 0.25);
+           box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1),0 1px 0px rgba(255, 255, 255, 0.25);
+	   -webkit-transition: none;
+           -moz-transition: none;
+	   -ms-transition: none;
+           -o-transition: none;
+	   transition: none;
+}
+input[type='submit']:hover{
+    background-color: #BFBFBF;
+}

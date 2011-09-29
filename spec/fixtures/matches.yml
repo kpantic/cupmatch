@@ -1,0 +1,32 @@
+bcnars:
+  date: 2011-06-09
+  cup: ucl
+  stadium: campnou
+  home_team: fcbarcelona
+  away_team: arsenal
+  home_team_result: 3
+  away_team_result: 0
+rmabcn:
+  date: 2011-06-12
+  cup: laliga
+  stadium: bernabeu
+  home_team: realmadrid
+  away_team: fcbarcelona
+  home_team_result: 0
+  away_team_result: 3
+arsbcn:
+  date: 2011-06-11
+  cup: premier
+  stadium: oldtrafford
+  home_team: arsenal
+  away_team: fcbarcelona
+  home_team_result: 0
+  away_team_result: 5
+bcnrma:
+  date: 2011-06-10
+  cup: laliga
+  stadium: bernabeu
+  home_team: fcbarcelona
+  away_team: realmadrid
+  home_team_result: 5
+  away_team_result: 0

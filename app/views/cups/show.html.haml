@@ -1,0 +1,47 @@
+%p
+  .image
+    = image_tag @cup.image.url(:medium)
+  %br
+  %b
+    Name:
+  = @cup.name
+  %br
+  %b
+    Country:
+  = @cup.country
+  %br
+  %b
+    Year started:
+  = @cup.year_started
+  %br
+  %b
+    Frequency:
+  = @cup.frequency
+
+= link_to 'Edit', edit_cup_path(@cup)
+|
+= link_to 'Back', cups_path
+
+%ul.tabs
+  %li.active
+    %a{:href => "#stadiums"}
+      Stadiums
+  %li
+    %a{:href => "#winners"}
+      Winners
+  %li
+    %a{:href => "#matches"}
+      Matches
+
+.tab-content
+  #stadiums
+    = render :template => 'stadia/index'
+  #winners
+    = render :template => 'cup_winners/index'
+  #matches
+    = render :template => 'matches/index'
+
+:javascript
+  $(function(){
+  $('a[href="#stadiums"]').click();
+  });
